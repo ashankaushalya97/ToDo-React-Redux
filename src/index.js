@@ -41,15 +41,32 @@ import {Provider} from "react-redux"
 // store.dispatch(decrement());
 
 
-const store = createStore(
-    allreducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
+// const store = createStore(
+//     allreducers,
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//     );
+
+const store = createStore(reducer);
+
+function reducer(state,action){
+    if(action.type === "changeState"){
+        return action.payload.newState;
+    }
+}
+
+const action = {
+    type: 'changeState',
+    payload: {
+        newState: 'newState'
+    }
+}
+
+store.dispatch(action);
 
 ReactDOM.render(
-    <Provider store={store}>
+    // <Provider store={store}>
         <App />
-    </Provider>
+    // </Provider>
 
 , document.getElementById('root'));
 
